@@ -11,7 +11,7 @@ def get_stores():
 @app.post("/store")
 def create_store():
     store_data = request.get_json()
-    if "name" not in store_data: 
+    if "name" not in store_data:
         abort(400, message="Bad request. Ensure 'name' is included in the JSON payload. ")
     for store in stores.values():
         if store_data["name"] == store["name"]:
@@ -55,6 +55,14 @@ def get_item(item_id):
         return items[item_id]
     except KeyError:
         return {"message" : "item not found"},404
+    
+@app.delete("/item/<string>:item_id")
+def delete_an_item(item_id):
+    try:
+        del items[item_id]
+        return {"message":"Item deleted"},200
+    except KeyError:
+        abort(404,message="Item not found.")
 
 @app.get("/item")
 def get_all_items():
