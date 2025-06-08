@@ -1,4 +1,4 @@
-# Store API
+# CONTRIBUTING
 
 ## How to run the Dockerfile locally
 
